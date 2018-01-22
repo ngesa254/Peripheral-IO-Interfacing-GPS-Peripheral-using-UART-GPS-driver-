@@ -21,6 +21,12 @@ public class GpsService extends Service {
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        destroyGps();
+    }
+
+    @Override
     public IBinder onBind(Intent intent) {
         return null;
     }
