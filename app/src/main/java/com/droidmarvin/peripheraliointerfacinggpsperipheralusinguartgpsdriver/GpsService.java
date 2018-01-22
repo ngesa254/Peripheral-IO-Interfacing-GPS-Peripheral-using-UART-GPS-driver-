@@ -17,7 +17,9 @@ public class GpsService extends Service {
     private static final String UART_BUS = "";
     private NmeaGpsDriver mGpsDriver;
 
-    public GpsService() {
+    @Override
+    public void onCreate() {
+        setupGps();
     }
 
     @Override
