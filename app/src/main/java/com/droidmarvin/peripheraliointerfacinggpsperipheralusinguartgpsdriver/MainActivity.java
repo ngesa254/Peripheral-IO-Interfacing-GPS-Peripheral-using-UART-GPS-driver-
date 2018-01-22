@@ -1,6 +1,9 @@
 package com.droidmarvin.peripheraliointerfacinggpsperipheralusinguartgpsdriver;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -34,5 +37,21 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    private void startLocationRequest() {
+        this.startService(new Intent(this, GpsService.class));
+
+        mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        // We need permission to get location updates
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // A problem occurred auto-granting the permission
+            Log.d(TAG, "No permission");
+            return;
+        }
+        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                0, 0, mLocationListener);
     }
 }
