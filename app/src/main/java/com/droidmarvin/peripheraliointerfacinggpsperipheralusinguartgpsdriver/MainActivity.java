@@ -54,4 +54,9 @@ public class MainActivity extends Activity {
         mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                 0, 0, mLocationListener);
     }
+
+    private void stopLocationRequest() {
+        this.stopService(new Intent(this, GpsService.class));
+        mLocationManager.removeUpdates(mLocationListener);
+    }
 }
