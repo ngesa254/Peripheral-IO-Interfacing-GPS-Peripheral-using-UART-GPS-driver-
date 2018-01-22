@@ -39,4 +39,19 @@ public class GpsService extends Service {
             Log.w(TAG, "Unable to open GPS UART", e);
         }
     }
+
+    private void destroyGps() {
+        if (mGpsDriver != null) {
+            // Unregister components
+            mGpsDriver.unregister();
+
+            try {
+                mGpsDriver.close();
+            } catch (IOException e) {
+                Log.w(TAG, "Unable to close GPS driver", e);
+            } finally {
+                mGpsDriver = null;
+            }
+        }
+    }
 }
