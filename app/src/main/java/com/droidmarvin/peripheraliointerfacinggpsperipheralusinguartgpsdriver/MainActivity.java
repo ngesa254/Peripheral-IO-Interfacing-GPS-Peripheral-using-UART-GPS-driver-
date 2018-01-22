@@ -39,6 +39,12 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopLocationRequest();
+    }
+
     private void startLocationRequest() {
         this.startService(new Intent(this, GpsService.class));
 
